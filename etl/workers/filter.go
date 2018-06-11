@@ -40,7 +40,9 @@ func (filter filter) Next() (err error) {
 			return
 		}
 		var include bool
-		if include, err = filter.condition(filter.c, filter.iterator.CurrentItem()); include {
+		if include, err = filter.condition(filter.c, filter.iterator.CurrentItem()); err != nil {
+			return
+		} else if include {
 			// Stop on good items, skip bad ones.
 			break
 		}

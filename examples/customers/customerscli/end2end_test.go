@@ -10,45 +10,84 @@ import (
 )
 
 func TestEndToEnd(t *testing.T) {
-	openFileMock := func(name string) (r *os.File, err error) {
-		var w *os.File
-		r, w, err = os.Pipe()
-		if err != nil {
-			return
+	openFileMock := func(content string) func(name string) (r *os.File, err error) {
+		return func(name string) (r *os.File, err error) {
+			var w *os.File
+			r, w, err = os.Pipe()
+			if err != nil {
+				return
+			}
+			_, err = w.WriteString(content)
+			w.Close()
+			return r, nil
 		}
-		_, err = w.WriteString(endToEndInput)
-		w.Close()
-		return r, nil
 	}
-	workflow := CreateWorkflow(openFileMock, "id")
-	c := context.Background()
-	input := GetFileNamesIterator("")
-	r, w, err := os.Pipe()
-	if err != nil {
-		t.Fatal(err)
-	}
-	os.Stdout = w
-	var wg sync.WaitGroup
-	wg.Add(1)
-	go func() {
-		data, err := ioutil.ReadAll(r)
+
+	t.Run("invalid_json", func(t *testing.T) {
+		workflow := CreateWorkflow(openFileMock(endToEndInvalidJson), "id")
+		c := context.Background()
+		input := GetFileNamesIterator("")
+		if err := workflow.Execute(c, input); err == nil {
+			t.Fatal("expected to get error")
+		}
+	})
+
+	t.Run("invalid_lat", func(t *testing.T) {
+		workflow := CreateWorkflow(openFileMock(endToEndInvalidLat), "id")
+		c := context.Background()
+		input := GetFileNamesIterator("")
+		if err := workflow.Execute(c, input); err == nil {
+			t.Fatal("expected to get error")
+		}
+	})
+
+	t.Run("invalid_lon", func(t *testing.T) {
+		workflow := CreateWorkflow(openFileMock(endToEndInvalidLon), "id")
+		c := context.Background()
+		input := GetFileNamesIterator("")
+		if err := workflow.Execute(c, input); err == nil {
+			t.Fatal("expected to get error")
+		}
+	})
+
+	t.Run("valid_input", func(t *testing.T) {
+		workflow := CreateWorkflow(openFileMock(endToEndValidInput), "id")
+		c := context.Background()
+		input := GetFileNamesIterator("")
+		r, w, err := os.Pipe()
 		if err != nil {
 			t.Fatal(err)
 		}
-		if string(data) != strings.TrimLeft(endToEndExpectedOutput, " \n\r") {
-			t.Errorf("unexpected output:\n%v", string(data))
+		os.Stdout = w
+		var wg sync.WaitGroup
+		wg.Add(1)
+		go func() {
+			data, err := ioutil.ReadAll(r)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if string(data) != strings.TrimLeft(endToEndExpectedOutput, " \n\r") {
+				t.Errorf("unexpected output:\n%v", string(data))
+			}
+			wg.Done()
+		}()
+		if err = workflow.Execute(c, input); err != nil {
+			t.Fatal(err)
 		}
-		wg.Done()
-	}()
-	if err = workflow.Execute(c, input); err != nil {
-		t.Fatal(err)
-	}
-	w.Close()
-	wg.Wait()
+		w.Close()
+		wg.Wait()
+	})
+
 }
 
 const (
-	endToEndInput = `{"latitude": "52.986375", "user_id": 12, "name": "Christina McArdle", "longitude": "-6.043701"}
+	endToEndInvalidJson = `{"latitude": "52.986375", "user_id": 12, "name": "Christina McArdle", "longitude": "-6.043701"}
+{"latitude": "51.92893", "user_id": 1, "name": "Alice Cahill", "longitude": "-10.27699"`
+
+	endToEndInvalidLat = `{"latitude": "abcde", "user_id": 12, "name": "Christina McArdle", "longitude": "-6.043701"}`
+	endToEndInvalidLon = `{"latitude": "52.986375", "user_id": 12, "name": "Christina McArdle", "longitude": "abcde"}`
+
+	endToEndValidInput = `{"latitude": "52.986375", "user_id": 12, "name": "Christina McArdle", "longitude": "-6.043701"}
 {"latitude": "51.92893", "user_id": 1, "name": "Alice Cahill", "longitude": "-10.27699"}
 {"latitude": "51.8856167", "user_id": 2, "name": "Ian McArdle", "longitude": "-10.4240951"}
 {"latitude": "52.3191841", "user_id": 3, "name": "Jack Enright", "longitude": "-8.5072391"}

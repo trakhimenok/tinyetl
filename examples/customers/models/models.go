@@ -19,13 +19,13 @@ type CustomerExtended struct {
 	Longitude string `json:"longitude"`
 }
 
-func (customer CustomerExtended) GeoPoint() (point geo.Point, err error) {
-	if point.Latitude, err = strconv.ParseFloat(customer.Latitude, 64); err != nil {
+func (j CustomerExtended) GeoPoint() (point geo.Point, err error) {
+	if point.Latitude, err = strconv.ParseFloat(j.Latitude, 64); err != nil {
 		err = errors.New("failed to parse latitude to float")
 		return
 	}
-	if point.Longitude, err = strconv.ParseFloat(customer.Longitude, 64); err != nil {
-		err = errors.New("failed to parse latitude to float")
+	if point.Longitude, err = strconv.ParseFloat(j.Longitude, 64); err != nil {
+		err = errors.New("failed to parse longitude to float")
 		return
 	}
 	return
