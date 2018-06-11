@@ -8,8 +8,11 @@ import (
 	"os"
 )
 
+type FileOpenerFunc func(name string) (*os.File, error)
+
 // FileInput opens files in read-only mode for processing
 type FileInput struct {
+	OpenFile                FileOpenerFunc
 	ContinueOnFileOpenError bool
 }
 
@@ -32,7 +35,11 @@ func (worker FileInput) MapItemToItem(c context.Context, item etl.WorkItem) (out
 		return
 	}
 
-	file, err := os.Open(fileName)
+	openFile := worker.OpenFile
+	if openFile == nil {
+		openFile = os.Open
+	}
+	file, err := openFile(fileName)
 	if err != nil {
 		return output, err
 	}

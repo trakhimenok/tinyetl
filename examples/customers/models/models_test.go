@@ -1,8 +1,8 @@
 package models
 
 import (
-	"testing"
 	"encoding/json"
+	"testing"
 )
 
 func TestCustomerExtended_UnmarshalJSON(t *testing.T) {

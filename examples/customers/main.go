@@ -16,7 +16,7 @@ func main() {
 
 	// Creates workflow defined by chain of workers.
 	// Initialization is in separate package to support unit-testing.
-	workflow := customerscli.CreateWorkflow(*sorting)
+	workflow := customerscli.CreateWorkflow(nil, *sorting)
 
 	// Create initial work items as list of files to process.
 	fileNamesIterator := customerscli.GetFileNamesIterator(*input)

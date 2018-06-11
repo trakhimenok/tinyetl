@@ -1,9 +1,9 @@
 package workers
 
 import (
-	"testing"
 	"context"
 	"github.com/astec/tinyetl/etl"
+	"testing"
 )
 
 func TestSorter(t *testing.T) {
@@ -30,7 +30,7 @@ func TestSorter(t *testing.T) {
 		actual = append(actual, iterator.CurrentItem().Data.(int))
 	}
 
-	expects := []int {1, 2, 3, 5}
+	expects := []int{1, 2, 3, 5}
 	if len(actual) != len(expects) {
 		t.Fatalf("unexpected result: %v", actual)
 	}

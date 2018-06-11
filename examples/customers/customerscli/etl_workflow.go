@@ -1,28 +1,30 @@
 package customerscli
 
 import (
+	"context"
+	"fmt"
 	"github.com/astec/tinyetl/etl"
+	etlWorkers "github.com/astec/tinyetl/etl/workers"
+	"github.com/astec/tinyetl/examples/customers/geo"
 	"github.com/astec/tinyetl/examples/customers/models"
 	"strings"
-	"fmt"
-	"github.com/astec/tinyetl/examples/customers/geo"
-	etlWorkers "github.com/astec/tinyetl/etl/workers"
-	"context"
 )
 
-func CreateWorkflow(sorting string) (workflow etl.Workflow) {
-	workers := createWorkflowWorkers(sorting)
+type InputType string
+
+func CreateWorkflow(fileOpener etlWorkers.FileOpenerFunc, sorting string) (workflow etl.Workflow) {
+	workers := createWorkflowWorkers(fileOpener, sorting)
 	return etl.NewWorkflow(workers)
 }
 
-func createWorkflowWorkers(sorting string) (workers []etl.Worker) {
+func createWorkflowWorkers(fileOpener etlWorkers.FileOpenerFunc, sorting string) (workers []etl.Worker) {
 	const kilometers = 1000
 
 	intercomOffice := geo.Point{Latitude: 53.339428, Longitude: -6.257664}
 	workers = []etl.Worker{
 		//etlWorkers.DataToConsolePrinter{},
-		etlWorkers.FileInput{},      // Read input from files. Can nbe replaced with HTTP client in future.
-		etlWorkers.StreamSplitter{}, // Split stream into chunks by line break
+		etlWorkers.FileInput{OpenFile: fileOpener}, // Read input from files. Can be replaced with HTTP client in future.
+		etlWorkers.StreamSplitter{},                // Split stream into chunks by line break
 		//etlWorkers.DataToConsolePrinter{},
 		etlWorkers.NewJsonItemParser(func() interface{} { // Parses chunk of stream data as JSON into provider struct
 			return &models.CustomerExtended{}
