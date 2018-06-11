@@ -19,7 +19,7 @@ Build:[![CircleCI](https://circleci.com/gh/astec/tinyetl.svg?style=svg)](https:/
 that holds data item as `Data() interface{}`. It also has a reference to a previous worker
 for easier logging/troubleshooting in case of unexpected input. 
 - Asynchronous processing is not built-in at the moment but should be easy to add.
-Though current implementation allows workers return `erl.Iterator` and easily use goroutines for async processing.  
+Though current implementation allows workers return `etl.Iterator` and easily use goroutines for async processing.  
 - The library was designed in such a way that it requires minimum
   boiler-plating & coding from developers.
 
@@ -36,7 +36,7 @@ To run the program you would need Go language installed, preferably version 1.10
     ```
 2. Build the program using Go compiler
     ```
-    go build.
+    go build .
     ```
     This should produce `customers` executable file (_`customers.exe` on Windows_).
     
@@ -89,7 +89,7 @@ go test ./...
 3. To speedup development process input file name defaults to `customers.txt` if not specified.   
 
 ## Missing functionality in ETL library
-This is a test demo project. It misses few things:
+This is a test demo project. Due to time & purpose constraint it misses few things essential for production use. E.g:
 - Logging
 - Statistics & Performance counters
 - etc. 
