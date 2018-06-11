@@ -31,7 +31,7 @@ Though current implementation allows workers return `erl.Iterator` and easily us
 To run the program you would need Go language installed, preferably version 1.10.
 1. change current directory to `examples/customers`
     ```
-    cd $GOPATH/src/github.com/asterus/tinyetl/examples/customers
+    cd $GOPATH/src/github.com/astec/tinyetl/examples/customers
     ```
 2. Build the program using Go compiler
     ```
