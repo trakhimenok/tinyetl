@@ -34,7 +34,7 @@ To run the program you would need Go language installed, preferably version 1.10
     ```
     cd $GOPATH/src/github.com/astec/tinyetl/examples/customers
     ```
-2. Get all Go soruce code dependencies:
+2. Get all Go source code dependencies:
     ```
     go get ./...
     ```
@@ -87,6 +87,9 @@ To run all tests:
 ```
 go test ./...
 ```
+
+Some quick links for tests:
+- End to end tests: [/examples/customers/customerscli/end2end_test.go](https://github.com/astec/tinyetl/blob/master/examples/customers/customerscli/end2end_test.go)
   
 ## Notes about `examples/customers` implementation
 1. To minimize memory footprint `CustomerExtended` structure is mapped to `CustomerShot` before sorting.
