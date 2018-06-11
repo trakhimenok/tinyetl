@@ -52,5 +52,4 @@ func (workflow Workflow) executeWorker(c context.Context, worker Worker, items I
 	default:
 		panic(fmt.Sprintf("worker has unknown type %T, name: %v", worker, worker.Name()))
 	}
-	return
 }
