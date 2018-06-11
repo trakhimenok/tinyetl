@@ -8,7 +8,8 @@ The purpose of the project was to implement a test task for a job interview.
 
 ## Build & Quality status
 
-[badges here]
+[![CircleCI](https://circleci.com/gh/astec/tinyetl.svg?style=svg)](https://circleci.com/gh/astec/tinyetl)
+
 
 ## Architecture
 
