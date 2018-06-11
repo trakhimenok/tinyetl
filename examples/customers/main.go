@@ -41,7 +41,7 @@ func main() {
 func getFileNamesIterator(fileNamesArg string) etl.Iterator {
 	if fileNamesArg == "" { // Default file name, useful in DEV mode
 		fileNamesArg = "customers.txt"
-	} else if i := strings.Index(fileNamesArg, "="); i >= 0  { // workaround for kingpin bug
+	} else if i := strings.Index(fileNamesArg, "="); i >= 0 { // workaround for kingpin bug
 		fileNamesArg = fileNamesArg[i+1:]
 	}
 
@@ -81,7 +81,7 @@ func createWorkflowWorker() (workers []etl.Worker) {
 		}),
 	}
 	sortBy := *sorting
-	if i := strings.Index(sortBy, "="); i >= 0  { // workaround for kingpin bug
+	if i := strings.Index(sortBy, "="); i >= 0 { // workaround for kingpin bug
 		sortBy = sortBy[i+1:]
 	}
 	switch sortBy {

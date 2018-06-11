@@ -43,7 +43,7 @@ func (worker sorterWorker) MapIteratorToIterator(c context.Context, iterator etl
 }
 
 type sorter struct {
-	f SortLessFunc
+	f     SortLessFunc
 	items []etl.WorkItem
 }
 
