@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/asterus/tinyetl/etl"
+	"github.com/astec/tinyetl/etl"
 )
 
 type jsonItemParser struct {

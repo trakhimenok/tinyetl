@@ -3,10 +3,10 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/asterus/tinyetl/etl"
-	etlWorkers "github.com/asterus/tinyetl/etl/workers"
-	"github.com/asterus/tinyetl/examples/customers/geo"
-	"github.com/asterus/tinyetl/examples/customers/models"
+	"github.com/astec/tinyetl/etl"
+	etlWorkers "github.com/astec/tinyetl/etl/workers"
+	"github.com/astec/tinyetl/examples/customers/geo"
+	"github.com/astec/tinyetl/examples/customers/models"
 	"gopkg.in/alecthomas/kingpin.v2"
 	"strings"
 )

@@ -4,7 +4,7 @@ package models
 
 import (
 	"errors"
-	"github.com/asterus/tinyetl/examples/customers/geo"
+	"github.com/astec/tinyetl/examples/customers/geo"
 	"strconv"
 )
 

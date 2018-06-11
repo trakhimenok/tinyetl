@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"context"
 	"fmt"
-	"github.com/asterus/tinyetl/etl"
+	"github.com/astec/tinyetl/etl"
 	"io"
 )
 

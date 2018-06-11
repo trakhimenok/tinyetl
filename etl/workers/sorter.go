@@ -2,7 +2,7 @@ package workers
 
 import (
 	"context"
-	"github.com/asterus/tinyetl/etl"
+	"github.com/astec/tinyetl/etl"
 	"io"
 	"sort"
 )

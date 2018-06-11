@@ -3,7 +3,7 @@ package workers
 import (
 	"testing"
 	"context"
-	"github.com/asterus/tinyetl/etl"
+	"github.com/astec/tinyetl/etl"
 )
 
 func TestSorter(t *testing.T) {
