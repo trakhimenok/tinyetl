@@ -24,9 +24,10 @@ Though current implementation allows workers return `etl.Iterator` and easily us
   boiler-plating & coding from developers.
 
 ## Project structure
-- [`examples/customers/main.go`](https://github.com/astec/tinyetl/blob/master/examples/customers/main.go) - main entry point for the job interview test.
-- `etl/` - workflow library
-- `etl/workers/` - workflow workers
+- [`/examples/customers/main.go`](https://github.com/astec/tinyetl/blob/master/examples/customers/main.go) - main entry point for the job interview test.
+- [`/examples/customers/customerscli/etl_workflow.go`](https://github.com/astec/tinyetl/blob/master/examples/customers/customerscli/etl_workflow.go) - ETL workflow initialization specific for our use case. Here we create fitler & sorter.
+- [`/etl/`](https://github.com/astec/tinyetl/etl) - ETL workflow library
+- [`etl/workers/`](https://github.com/astec/tinyetl/etl/workers) - built-in ETL workflow workers
 
 ## How to run `examples/customers`
 To run the program you would need Go language installed, preferably version 1.10.
