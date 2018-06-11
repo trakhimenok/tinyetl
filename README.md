@@ -8,8 +8,8 @@ The purpose of the project was to implement a test task for a job interview.
 
 ## Build & Quality status
 
-[![CircleCI](https://circleci.com/gh/astec/tinyetl.svg?style=svg)](https://circleci.com/gh/astec/tinyetl)
-
+Build:[![CircleCI](https://circleci.com/gh/astec/tinyetl.svg?style=svg)](https://circleci.com/gh/astec/tinyetl)
+[![Go Report Card](https://goreportcard.com/badge/github.com/astec/tinyetl)](https://goreportcard.com/report/github.com/astec/tinyetl)
 
 ## Architecture
 
