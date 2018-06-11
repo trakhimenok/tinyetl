@@ -20,7 +20,7 @@ func CreateWorkflow(fileOpener etlWorkers.FileOpenerFunc, sorting string) (workf
 func createWorkflowWorkers(fileOpener etlWorkers.FileOpenerFunc, sorting string) (workers []etl.Worker) {
 	const kilometers = 1000
 
-	intercomOffice := geo.Point{Latitude: 53.339428, Longitude: -6.257664}
+	centerPoint := geo.Point{Latitude: 53.339428, Longitude: -6.257664}
 	workers = []etl.Worker{
 		//etlWorkers.DataToConsolePrinter{},
 		etlWorkers.FileInput{OpenFile: fileOpener}, // Read input from files. Can be replaced with HTTP client in future.
@@ -35,7 +35,7 @@ func createWorkflowWorkers(fileOpener etlWorkers.FileOpenerFunc, sorting string)
 			if customerLocation, err = customer.GeoPoint(); err != nil {
 				return
 			}
-			return geo.Distance(customerLocation, intercomOffice) < 100*kilometers, nil
+			return geo.Distance(customerLocation, centerPoint) < 100*kilometers, nil
 		}),
 		// Minimise memory footprint as next sorting step requires loading all items to memory
 		etlWorkers.NewMapper("CustomerExtended=>CustomerShot", func(c context.Context, input etl.WorkItem) (output interface{}, err error) {
