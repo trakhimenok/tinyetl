@@ -24,7 +24,7 @@ Though current implementation allows workers return `erl.Iterator` and easily us
   boiler-plating & coding from developers.
 
 ## Project structure
-- `examples/customers/main.go` - main entry point for the job interview test.
+- [`examples/customers/main.go`](https://github.com/astec/tinyetl/blob/master/examples/customers/main.go) - main entry point for the job interview test.
 - `etl/` - workflow library
 - `etl/workers/` - workflow workers
 
