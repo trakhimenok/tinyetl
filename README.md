@@ -34,13 +34,18 @@ To run the program you would need Go language installed, preferably version 1.10
     ```
     cd $GOPATH/src/github.com/astec/tinyetl/examples/customers
     ```
-2. Build the program using Go compiler
+2. Get all Go soruce code dependencies:
+    ```
+    go get ./...
+    ```
+
+3. Build the program using Go compiler
     ```
     go build .
     ```
     This should produce `customers` executable file (_`customers.exe` on Windows_).
     
-3. To get hints for program arguments run with `--help` flag:
+4. To get hints for program arguments run with `--help` flag:
     ```
     >customers.exe --help
     usage: customers.exe [<flags>]
@@ -53,13 +58,13 @@ To run the program you would need Go language installed, preferably version 1.10
                          descending order.
     ```
 
-3. File to be processed can be specified with `--input` or short `-i` parameter. 
+5. File to be processed can be specified with `--input` or short `-i` parameter. 
     ```
     customers --input=customers.txt
     ```
     It defaults to `customers.txt`.
 
-3. Sorting can be specified with `--input` or short `-i` parameter. 
+6. Sorting can be specified with `--input` or short `-i` parameter. 
     ```
     customers --sort=id
     ```
