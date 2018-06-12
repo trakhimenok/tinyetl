@@ -6,6 +6,8 @@ ETL stands for <b>E</b>xtract-<b>T</b>ransform-<b>L</b>oad
 ## Purpose
 The purpose of the project was to implement a test task for a job interview.
 
+The original task: filter list of customers in a range of 100km from a geo point and return id-name pairs sorted by ID (_ascending_).
+
 ## Build & Quality status
 
 Build:[![CircleCI](https://circleci.com/gh/astec/tinyetl.svg?style=svg)](https://circleci.com/gh/astec/tinyetl)
