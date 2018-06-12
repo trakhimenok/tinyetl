@@ -16,6 +16,8 @@ func main() {
 
 	// Creates workflow defined by chain of workers.
 	// Initialization is in separate package to support unit-testing.
+	// Quick link in case if you browse not in IDE:
+	// https://github.com/astec/tinyetl/blob/master/examples/customers/customerscli/etl_workflow.go
 	workflow := customerscli.CreateWorkflow(nil, *sorting)
 
 	// Create initial work items as list of files to process.
